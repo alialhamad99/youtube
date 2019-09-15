@@ -1,0 +1,33 @@
+﻿<html>
+<head>
+
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+
+<script>
+
+function loaddata(x) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+var result = JSON.parse(this.responseText);
+      document.getElementById("res").innerHTML = result.items[0].contentDetails.relatedPlaylists.uploads;
+      
+    }
+  };
+  xhttp.open("GET", "https://www.googleapis.com/youtube/v3/channels?id=" + x + "&key=AIzaSyA7kmklNrAsCNZJLCIjsFhwc8mRCgB6dmg&part=contentDetails", true);
+  xhttp.send();
+}
+
+</script>
+
+</head>
+<body>
+<div style='text-align:center'>
+<input type='textbox' id='txt' style='width:300px' />
+<input type='button' onclick='loaddata(txt.value)' value='get id' />
+
+<div id='res' style='padding:10px'>no data</div>
+</div>
+</body>
+</html>
