@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <script>
-$( document ).ready(function() {
+
 //هنا تتم اضافة اي قناة جديدة
 var x = [
 "UCrvTAKeiHkB-ZTKxVBtk48A",
@@ -11,23 +11,35 @@ var x = [
 "UCdxqxa0OVNl7cFb3lqrJEtQ",
 "UCpzp1_jpI3lfYy6eTW1kqhw",
 "UCcWCkpCICFtzIkfoVZPNTPg",
-"UCqqcCsQU_HcY1tx62d1RCQQ",
-"UCILS4KME2kk0pqCds0ECM7A",
-"UCoiFnz3kVauuKes4a9hYzjQ",
 "UCPRKH76TMHmHjUMeejf8aJQ",
 "UCHAbNxkU837UAkZ-OPtdUUw",
 "UC9XCleqguul7HALIYMdE6xw",
 "UCN_stewXbthzzqJhiwmW_pg",
 "UCXGYukdagtupUIxzZlutNoA"
 ];
+
+/*
+ */
 //**********************************
 
+var ii=0;
 var result;
 var hbody = new Array();
+
+$( document ).ready(function() {
+
+loadVidos();
+
+});
 
 function loadVidos(){
 hbody = [];
 document.getElementById("res").innerHTML = '';
+
+
+for (n=0; n < x.length; n++) {
+document.getElementById("res").innerHTML += '<div id="p' + x[n] + '" class="pclass" ><div id ="t' + x[n] + '" class="tclass"></div><div id="c' + x[n] + '" class="cclass"></div></div>';
+}
 
 
 
@@ -39,23 +51,30 @@ document.getElementById("res").innerHTML = '';
 //x.push(s);
 //}
 
-for (i=0; i < x.length; i++) {
-loaddata(x[i]);
-}
+//for (i=0; i < x.length; i++) {
+loaddata(x[ii]);
+//}
 
 } 
 
-function loaddata(x) {
+
+
+function loaddata(xx) {
+//alert(xx);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
  result = JSON.parse(this.responseText);
  showres(result);
+ 
+
+ 
     }
   };
-  xhttp.open("GET", "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=date&maxResults=50&channelId=" + x + "&key=AIzaSyA7kmklNrAsCNZJLCIjsFhwc8mRCgB6dmg", true);
+  xhttp.open("GET", "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=date&maxResults=50&channelId=" + xx + "&key=AIzaSyA7kmklNrAsCNZJLCIjsFhwc8mRCgB6dmg", true);
   xhttp.send();
+  
 }
 
 function showres(result){
@@ -63,7 +82,9 @@ function showres(result){
 
 for(var i =0;i < result.items.length; i++){
 if (result.items[i].snippet.title.indexOf('يوكاى') == -1 && result.items[i].snippet.title.indexOf('كسلان') == -1 ){
-       hbody[i] += '<div style="display: inline-block;vertical-align:top;width:350px;border:1px solid lightgray;padding:3px;margin:5px"><a href="player.html?id=' + result.items[i].id.videoId + '">' + 
+       //hbody[i] 
+	   document.getElementById("t" + result.items[i].snippet.channelId).innerHTML = result.items[i].snippet.channelTitle;
+	   document.getElementById("c" + result.items[i].snippet.channelId).innerHTML += '<div style="display: inline-block;vertical-align:top;width:350px;border:1px solid lightgray;padding:3px;margin:5px"><a href="player.html?id=' + result.items[i].id.videoId + '">' + 
 	  '<div><img src="' + result.items[i].snippet.thumbnails.medium.url + '" /></div>' +
 	  '<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 75ch;">' + result.items[i].snippet.title + '</div>' +
 	  '</a>' + 
@@ -72,27 +93,67 @@ if (result.items[i].snippet.title.indexOf('يوكاى') == -1 && result.items[i]
 	  }
       }
 	  
-document.getElementById("res").innerHTML = hbody;
-		var hdata = document.getElementById("res").innerHTML;
-document.getElementById("res").innerHTML = hdata.replace(new RegExp(',undefined', 'g'), '').replace(new RegExp('undefined', 'g'), '');
+//document.getElementById("res").innerHTML = hbody;
+//		var hdata = document.getElementById("res").innerHTML;
+//document.getElementById("res").innerHTML = hdata.replace(new RegExp(',undefined', 'g'), '').replace(new RegExp('undefined', 'g'), '');
+
+
+  
+ if (ii < x.length){
+ii++;
+loaddata(x[ii]);
+}
+  
+
 }
 
 
-loadVidos();
+//loadVidos();
 
-});
+
+ 
+
+
 
 </script>
 <style>
 a:link {
     text-decoration: none;
 }
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.pclass {
+max-height:600px;
+background-color:white;
+}
+
+.tclass {
+text-align:left;
+color:white;
+background-color:#283747;
+font-size:20px;
+font-weight: bold;
+padding:10px;
+margin-top:20px;
+}
+
+.cclass {
+width: 100%;
+max-height:500px;
+overflow-x:auto;
+overflow-y:hidden;
+white-space: nowrap;
+}
 </style>
 
 </head>
 <body>
 <div style='text-align:center'>
-<div id='res' style='padding:10px'></div>
+<div id='res' style='padding:10px;background-color:#F2F4F4 ;'></div>
 </div>
 </body>
 </html>
