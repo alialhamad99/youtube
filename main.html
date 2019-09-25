@@ -84,7 +84,7 @@ function showres(result){
 for(var i =0;i < result.items.length; i++){
 if (result.items[i].snippet.title.indexOf('يوكاى') == -1 && result.items[i].snippet.title.indexOf('كسلان') == -1 ){
        //hbody[i] 
-	   document.getElementById("t" + result.items[i].snippet.channelId).innerHTML = '<div>' + result.items[i].snippet.channelTitle + '</div><div style="color:#283747">' + result.items[i].snippet.channelId + '</div>' ;
+	   document.getElementById("t" + result.items[i].snippet.channelId).innerHTML = '<div>' + result.items[i].snippet.channelTitle + '</div><div style="color:#283747;font-size:5px">' + result.items[i].snippet.channelId + '</div>' ;
 	   document.getElementById("c" + result.items[i].snippet.channelId).innerHTML += '<div style="display: inline-block;vertical-align:top;width:350px;border:1px solid lightgray;padding:3px;margin:5px"><a href="player.html?id=' + result.items[i].id.videoId + '">' + 
 	  '<div><img src="' + result.items[i].snippet.thumbnails.medium.url + '" /></div>' +
 	  '<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 75ch;">' + result.items[i].snippet.title + '</div>' +
