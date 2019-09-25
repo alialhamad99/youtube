@@ -89,7 +89,7 @@ if (result.items[i].snippet.title.indexOf('يوكاى') == -1 && result.items[i]
 	  '<div><img src="' + result.items[i].snippet.thumbnails.medium.url + '" /></div>' +
 	  '<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 75ch;">' + result.items[i].snippet.title + '</div>' +
 	  '</a>' + 
-	  '<div style="font-size:small;color:gray"><div>' + result.items[i].snippet.channelTitle + '</div><div>' + result.items[i].snippet.publishedAt.substring(0, 10) + '     </div></div>' +
+	  '<div style="font-size:small;color:gray"><div>' + result.items[i].snippet.channelTitle + '</div><div>' + result.items[i].snippet.publishedAt.substring(0, 10) + '     </div><div>' + result.items[i].snippet.channelId + '</div></div>' +
 	  '</div>';
 	  }
       }
